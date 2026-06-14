@@ -32,6 +32,8 @@ Splunk Nexus AI transforms enterprise infrastructure monitoring from reactive fi
 
 ## 🏗️ Architecture
 
+![Splunk Nexus AI Architecture](docs/diagrams/architecture.png)
+
 ```
 ┌──────────────────────────────────────────────────────────────────┐
 │                    SPLUNK NEXUS AI PLATFORM                       │

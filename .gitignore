@@ -8,6 +8,9 @@ frontend/.next/
 frontend/out/
 frontend/build/
 
+# Docs
+SUBMISSION.md
+
 # Python
 backend/__pycache__/
 backend/**/__pycache__/
