@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: splunk-nexus-ai
+  labels:
+    app: splunk-nexus-ai
+    environment: production

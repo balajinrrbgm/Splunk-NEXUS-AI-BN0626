@@ -1,0 +1,58 @@
+{
+  "dashboard": {
+    "id": null,
+    "title": "Splunk Nexus AI - System Overview",
+    "tags": ["nexus-ai", "observability"],
+    "timezone": "browser",
+    "panels": [
+      {
+        "title": "Request Rate",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 4, "x": 0, "y": 0},
+        "targets": [{"expr": "sum(rate(http_requests_total[5m]))", "legendFormat": "req/s"}]
+      },
+      {
+        "title": "P99 Latency",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 4, "x": 4, "y": 0},
+        "targets": [{"expr": "histogram_quantile(0.99, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))", "legendFormat": "p99"}]
+      },
+      {
+        "title": "Error Rate",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 4, "x": 8, "y": 0},
+        "targets": [{"expr": "sum(rate(http_requests_total{status=~\"5..\"}[5m])) / sum(rate(http_requests_total[5m])) * 100", "legendFormat": "errors"}]
+      },
+      {
+        "title": "Active AI Agents",
+        "type": "stat",
+        "gridPos": {"h": 4, "w": 4, "x": 12, "y": 0},
+        "targets": [{"expr": "nexus_agents_active_total", "legendFormat": "agents"}]
+      },
+      {
+        "title": "Request Rate Over Time",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+        "targets": [{"expr": "sum(rate(http_requests_total[5m])) by (service)", "legendFormat": "{{service}}"}]
+      },
+      {
+        "title": "Agent Actions",
+        "type": "timeseries",
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+        "targets": [{"expr": "sum(rate(nexus_agent_actions_total[5m])) by (agent_type)", "legendFormat": "{{agent_type}}"}]
+      },
+      {
+        "title": "Incidents by Severity",
+        "type": "piechart",
+        "gridPos": {"h": 8, "w": 8, "x": 0, "y": 12},
+        "targets": [{"expr": "nexus_incidents_total", "legendFormat": "{{severity}}"}]
+      },
+      {
+        "title": "Service Health Status",
+        "type": "table",
+        "gridPos": {"h": 8, "w": 16, "x": 8, "y": 12},
+        "targets": [{"expr": "nexus_service_health", "legendFormat": "{{service}}"}]
+      }
+    ]
+  }
+}
